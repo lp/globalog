@@ -62,7 +62,6 @@ require 'logger'
 class GlobaLog < Logger
 	require 'globalog_args'
 	require 'globalog_hijack'
-	$logger_args ||= Hash.new
 	
 	def GlobaLog.logger(def_out,def_level,follow=true)
 		Args.are(:log_output => def_out, :log_level => def_level)
