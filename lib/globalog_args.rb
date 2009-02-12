@@ -6,10 +6,15 @@ class GlobaLog
 	
 	module Args
 		
-		def Args.are(args)
+		def Args.are(args,override=false)
 			$logger_args ||= Hash.new
-			$logger_args[:log_level] ||= args[:log_level].to_sym
-			$logger_args[:log_output] ||= args[:log_output]
+			if override == true
+				$logger_args[:log_level] = args[:log_level].to_sym unless args[:log_level].nil?
+				$logger_args[:log_output] = args[:log_output] unless args[:log_output].nil?
+			else
+				$logger_args[:log_level] ||= args[:log_level].to_sym unless args[:log_level].nil?
+				$logger_args[:log_output] ||= args[:log_output] unless args[:log_output].nil?
+			end
 		end
 		
 		def Args::log_output
