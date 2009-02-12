@@ -2,7 +2,7 @@ require 'logger'
 class GlobaLog < Logger
 	$logger_args ||= Hash.new
 	
-	def GlobaLog.setup(def_out,def_level,follow=true)
+	def GlobaLog.logger(def_out,def_level,follow=true)
 		Args.are(:log_output => def_out, :log_level => def_level)
 		if follow
 			log = self.new(Args::log_output)
