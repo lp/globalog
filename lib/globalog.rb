@@ -63,14 +63,14 @@ class GlobaLog < Logger
 	require 'globalog_args'
 	require 'globalog_hijack'
 	
-	def GlobaLog.logger(def_out,def_level,follow=true)
-		Args.are(:log_output => def_out, :log_level => def_level)
-		if follow
-			log = self.new(Args::log_output)
-			log.level = Args::log_level
-		else
+	def GlobaLog.logger(def_out,def_level,master=false)
+		Args.are({:log_output => def_out, :log_level => def_level},master)	
+		if master.nil?
 			log = self.new(def_out)
 			log.level = Args.sym_to_level(def_level)
+		else
+			log = self.new(Args::log_output)
+			log.level = Args::log_level
 		end
 		return log
 	end
