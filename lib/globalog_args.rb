@@ -7,6 +7,7 @@ class GlobaLog
 	module Args
 		
 		def Args.are(args)
+			$logger_args ||= Hash.new
 			$logger_args[:log_level] ||= args[:log_level].to_sym
 			$logger_args[:log_output] ||= args[:log_output]
 		end
@@ -19,6 +20,7 @@ class GlobaLog
 			if $logger_args[:log_level].is_a?(Symbol)
 				$logger_args[:log_level] = self.sym_to_level($logger_args[:log_level])
 			end
+			$logger_args[:log_level]
 		end
 		
 		def Args.sym_to_level(sym)
