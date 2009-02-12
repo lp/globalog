@@ -9,8 +9,8 @@ class GlobaLog
 		
 		def initialize
 			super()
-			self[:log_level] = nil
-			self[:log_output] = nil
+			self[:log_level] = :fatal
+			self[:log_output] = STDERR
 			opts = OptionParser.new do |opts|
 				opts.on('-L','--log-level [STRING]','sets the Test Log Level') do |string|
 					self[:log_level] = string.to_sym
