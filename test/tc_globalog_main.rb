@@ -72,20 +72,8 @@ class TestGlobaLogMain < Test::Unit::TestCase
 	end
 	
 	def check_level(level,content)
-		level_match = [
-			lambda { assert_match(/unknown/,content) },
-			lambda { assert_match(/fatal/,content) },
-			lambda { assert_match(/error/,content) },
-			lambda { assert_match(/warn/,content) },
-			lambda { assert_match(/info/,content) },
-			lambda { assert_match(/debug/,content) }]
-		level_no_match = [
-			lambda { assert_no_match(/unknown/,content) },
-			lambda { assert_no_match(/fatal/,content) },
-			lambda { assert_no_match(/error/,content) },
-			lambda { assert_no_match(/warn/,content) },
-			lambda { assert_no_match(/info/,content) },
-			lambda { assert_no_match(/debug/,content) }]
+		level_match = match_assertions(content)
+		level_no_match = no_match_assertions(content)
 		case level
 		when :debug
 			0.upto(5) { |num| level_match[num].call }
@@ -105,6 +93,24 @@ class TestGlobaLogMain < Test::Unit::TestCase
 			0.upto(0) { |num| level_match[num].call }
 			5.downto(1) { |num| level_no_match[num].call }
 		end
+	end
+	
+	def match_assertions(content)
+		[ lambda { assert_match(/unknown/,content) },
+			lambda { assert_match(/fatal/,content) },
+			lambda { assert_match(/error/,content) },
+			lambda { assert_match(/warn/,content) },
+			lambda { assert_match(/info/,content) },
+			lambda { assert_match(/debug/,content) } ]
+	end
+	
+	def no_match_assertions(content)
+		[ lambda { assert_no_match(/unknown/,content) },
+			lambda { assert_no_match(/fatal/,content) },
+			lambda { assert_no_match(/error/,content) },
+			lambda { assert_no_match(/warn/,content) },
+			lambda { assert_no_match(/info/,content) },
+			lambda { assert_no_match(/debug/,content) } ]
 	end
 	
 	
