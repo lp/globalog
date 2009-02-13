@@ -1,9 +1,10 @@
 class GlobaLog
+	# The Hijack class manages the acquisition of command line arguments,
+	# playing nicely with other command line aware libs.
 	# Author:: lp (mailto:lp@spiralix.org)
 	# Copyright:: 2009 Louis-Philippe Perron - Released under the terms of the MIT license
 	# 
 	# :title:GlobaLog/Hijack
-	
 	class Hijack < Hash
 		require 'optparse'
 		

@@ -1,9 +1,9 @@
 class GlobaLog
+	# The Args module manages the GlobaLog arguments in the background.
 	# Author:: lp (mailto:lp@spiralix.org)
 	# Copyright:: 2009 Louis-Philippe Perron - Released under the terms of the MIT license
 	# 
 	# :title:GlobaLog/Args
-	
 	module Args
 		
 		def Args.are(args,override=false)

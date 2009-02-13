@@ -63,6 +63,18 @@ class GlobaLog < Logger
 	require 'globalog_args'
 	require 'globalog_hijack'
 	
+	# The +GlobaLog.logger+ acts as a constructor method for the logger.
+	# === Parameters
+	# * _def_out_ = the output io or logfile path
+	# * _def_level_ = the log level, as a symbol (i.e. :warn, :info, etc)
+	# * _master_ = (optional) the logger presence in the cascading settings chain
+	# _master_ can be any of the following:
+	# * _true_ = Impose its settings on the loggers down the chain
+	# * _false_ = Use the chain settings if present (default)
+	# * _nil_ = Is out of the chain
+	# === Example
+	# 	@log = GlobaLog.logger('logfile.txt',:error,true)
+	
 	def GlobaLog.logger(def_out,def_level,master=false)
 		Args.are({:log_output => def_out, :log_level => def_level},master)	
 		if master.nil?
@@ -75,10 +87,22 @@ class GlobaLog < Logger
 		return log
 	end
 	
+	# The +GlobaLog::output+ method return the current log output.
+	# Can be used to chain existing Logger instances to GlobaLog cascade, 
+	# when you don't want to replace them with GlobaLog instances.
+	# (and you can only replace the constructor, the logging will still work)
+	# === Example
+	# 	$logger = Logger.new(GlobaLog::output)
 	def GlobaLog::output
 		Args::log_output
 	end
 	
+	# The +Globalog::level+ method returns the current log level.
+	# Can be used to chain existing Logger instances to GlobaLog cascade, 
+	# when you don't want to replace them with GlobaLog instances.
+	# (and you can only replace the constructor, the logging will still work)
+	# === Example
+	# 	$logger.level = GlobaLog::level
 	def GlobaLog::level
 		Args::log_level
 	end
