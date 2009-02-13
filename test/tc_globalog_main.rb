@@ -12,6 +12,14 @@ class TestGlobaLogMain < Test::Unit::TestCase
 		File.new($test_file,'w').close
 	end
 	
+	def test_globalog
+		output = STDERR
+		level = :error
+		@log = GlobaLog.logger(output,level,true)
+		assert_equal(output,GlobaLog::output)
+		assert_equal(3,GlobaLog::level)
+	end
+	
 	def test_globalog_debug
 		prepare_test(:debug)
 		check_test(:debug)	
