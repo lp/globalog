@@ -66,6 +66,7 @@ And you can also run script2 with arguments to get different log level or output
   => Printing Debug!!
   
 So this allow you to set a default Logger setting in your libraries, override them with an other default setting in client scripts and still get the flexibility to override both defaults at runtime by providing command line arguments.  Ideal for testing purposes where you want a default log level for test overriding the Local log level of your tested libraries, while allowing you to choose the test log level at runtime. 
+# See Logger rdoc for full operation details: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
