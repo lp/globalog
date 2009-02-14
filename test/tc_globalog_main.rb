@@ -63,7 +63,9 @@ class TestGlobaLogMain < Test::Unit::TestCase
 		pid1 = fork {log_all_level('fork 1'); exit}
 		pid2 = fork {log_all_level('fork 2'); exit}
 		Process.waitpid(pid2,0)
-		External.new().log
+		External.new(0).log
+		External.new(1).log
+		External.new(2).log
 	end
 	
 	def check_test(level)
@@ -76,7 +78,9 @@ class TestGlobaLogMain < Test::Unit::TestCase
 		assert_match(/base/,content)
 		assert_match(/fork 1/,content)
 		assert_match(/fork 2/,content)
-		assert_match(/external/,content)
+		assert_match(/external 0/,content)
+		assert_match(/external 1/,content)
+		assert_match(/external 2/,content)
 	end
 	
 	def check_level(level,content)
