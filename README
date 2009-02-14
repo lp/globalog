@@ -22,7 +22,7 @@ Each individual logger can follow the setting's cascade, or not.  If it does, th
 
 It is essentially compatible with existing Logger, because it uses logger as it base lib.  So all logging is done the same way, with all of logger instance methods also working on globalog instances.  You can then transition code logged with logger easily, by either replacing the Logger initialisation in your code by a GlobaLog initialisation, or by leaving logger where it is and only deriving its output and level settings from globalog class methods of the same names, still allowing you to tap into globalog cascading settings.
 
-The logging in Globalog is done with Logger so please refer to its documentation for the logging methodologies: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
+The logging in GlobaLog is done with Logger so please refer to its documentation for the logging methodologies: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
 
 ///////////////////////////////////////////////////////////////////////////////////////
 Example:
