@@ -7,7 +7,7 @@
 # 
 # It is essentially compatible with existing Logger, because it uses logger as it base lib.  So all logging is done the same way, with all of logger instance methods also working on globalog instances.  You can then transition code logged with logger easily, by either replacing the Logger initialisation in your code by a GlobaLog initialisation, or by leaving logger where it is and only deriving its output and level settings from globalog class methods of the same names, still allowing you to tap into globalog cascading settings.
 # 
-# The logging in Globalog is done with Logger so please refer to its documentation for the logging methodologies: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
+# The logging in GlobaLog is done with Logger so please refer to its documentation for the logging methodologies: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
 # 
 # ///////////////////////////////////////////////////////////////////////////////////////
 # Example:
@@ -63,7 +63,7 @@ class GlobaLog < Logger
 	require 'globalog_args'
 	require 'globalog_hijack'
 	
-	# The +GlobaLog.logger+ acts as a constructor method for the logger.
+	# The GlobaLog.logger acts as a constructor method for the logger.
 	# === Parameters
 	# * _def_out_ = the output io or logfile path
 	# * _def_level_ = the log level, as a symbol (i.e. :warn, :info, etc)
@@ -97,7 +97,7 @@ class GlobaLog < Logger
 		return log
 	end
 	
-	# The +GlobaLog::output+ method return the current log output.
+	# The GlobaLog::output method return the current log output.
 	# Can be used to chain existing Logger instances to GlobaLog cascade, 
 	# when you don't want to replace them with GlobaLog instances.
 	# (and you can only replace the constructor, the logging will still work)
@@ -107,7 +107,7 @@ class GlobaLog < Logger
 		Args::log_output
 	end
 	
-	# The +Globalog::level+ method returns the current log level.
+	# The GlobaLog::level method return the current log level.
 	# Can be used to chain existing Logger instances to GlobaLog cascade, 
 	# when you don't want to replace them with GlobaLog instances.
 	# (and you can only replace the constructor, the logging will still work)
@@ -117,12 +117,19 @@ class GlobaLog < Logger
 		Args::log_level
 	end
 	
-	# 
+	# The GlobaLog::options method return the current extra Logger options.
+	# i.e. Log rotations, size, etc.
+	# They are returned as array so must be splatted before they are usefull for classic Logger initialization.
+	# === Example
+	# 	$logger = Logger.new(GlobaLog::output,*GlobaLog::options)
 	def GlobaLog::options
 		Args::log_opts
 	end
 	
-	# 
+	# The GlobaLog::logger_params method return the current full Logger parameter arguments.
+	# They are returned as array so must be splatted before they are usefull for classic Logger initialization.
+	# === Example
+	# 	$logger = Logger.new(*GlobaLog::logger_params)
 	def GlobaLog::logger_params
 		return Args::log_output, *Args::log_opts
 	end
