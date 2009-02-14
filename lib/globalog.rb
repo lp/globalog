@@ -75,13 +75,23 @@ class GlobaLog < Logger
 	# === Example
 	# 	@log = GlobaLog.logger('logfile.txt',:error,true)
 	
-	def GlobaLog.logger(def_out,def_level,master=false)
-		Args.are({:log_output => def_out, :log_level => def_level},master)	
+	def GlobaLog.logger(def_out,def_level, opt1= :empty, opt2= :empty, opt3= :empty)
+		logger_opts = []; master = false
+		[opt1,opt2,opt3].each do |opt|
+			if opt == :empty
+				next
+			elsif opt == true || opt == false || opt == nil
+				master = opt
+			else
+				logger_opts << opt
+			end
+		end
+		Args.are({:log_output => def_out, :log_level => def_level, :log_opts => logger_opts},master)	
 		if master.nil?
-			log = self.new(def_out)
+			log = self.new(def_out,*logger_opts)
 			log.level = Args.sym_to_level(def_level)
 		else
-			log = self.new(Args::log_output)
+			log = self.new(Args::log_output,*logger_opts)
 			log.level = Args::log_level
 		end
 		return log
@@ -105,6 +115,16 @@ class GlobaLog < Logger
 	# 	$logger.level = GlobaLog::level
 	def GlobaLog::level
 		Args::log_level
+	end
+	
+	# 
+	def GlobaLog::options
+		Args::log_opts
+	end
+	
+	# 
+	def GlobaLog::logger_params
+		return Args::log_output, *Args::log_opts
 	end
 	
 end
