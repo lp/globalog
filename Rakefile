@@ -4,7 +4,7 @@ require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s|
   s.name = 'globalog'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.author = 'Louis-Philippe Perron'
   s.email = 'lp@spiralix.org'
   s.homepage = 'http://globalog.rubyforge.org/'
