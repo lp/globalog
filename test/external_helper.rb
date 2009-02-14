@@ -12,14 +12,27 @@ module LogMessage
 end
 
 class External
+	require 'logger'
 	include LogMessage
 	
-	def initialize
-		@log = GlobaLog.logger(STDERR,:warn)
+	def initialize(type)
+		case type
+		when 0
+			@log = GlobaLog.logger(STDERR,:warn)
+			@id = type
+		when 1
+			@log = Logger.new(*GlobaLog::logger_params)
+			@log.level = GlobaLog::level
+			@id = type
+		when 2
+			@log = Logger.new(GlobaLog::output,*GlobaLog::options)
+			@log.level = GlobaLog::level
+			@id = type
+		end
 	end
 	
 	def log
-		log_all_level('external')
+		log_all_level("external #{@id}")
 	end
 	
 end
