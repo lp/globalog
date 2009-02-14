@@ -51,7 +51,7 @@
 #   => Printing Debug!!
 #   
 # So this allow you to set a default Logger setting in your libraries, override them with an other default setting in client scripts and still get the flexibility to override both defaults at runtime by providing command line arguments.  Ideal for testing purposes where you want a default log level for test overriding the Local log level of your tested libraries, while allowing you to choose the test log level at runtime. 
-#
+# See Logger rdoc for full operation details: http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc/
 #  
 # Author:: lp (mailto:lp@spiralix.org)
 # Copyright:: 2009 Louis-Philippe Perron - Released under the terms of the MIT license
@@ -67,6 +67,7 @@ class GlobaLog < Logger
 	# === Parameters
 	# * _def_out_ = the output io or logfile path
 	# * _def_level_ = the log level, as a symbol (i.e. :warn, :info, etc)
+	# * _opt1_, _opt2_ = (optional) logger extra log rotation parameters (see Logger rdoc for more details) 
 	# * _master_ = (optional) the logger presence in the cascading settings chain
 	# _master_ can be any of the following:
 	# * _true_ = Impose its settings on the loggers down the chain
