@@ -1,8 +1,8 @@
-$:.unshift File.join(File.dirname(__FILE__), "..", "lib")
-require 'globalog'
 require 'test/unit'
 
-require 'test/external_helper'
+require File.join( File.dirname( File.expand_path(__FILE__)), '..', 'lib', 'globalog')
+require File.join( File.dirname( File.expand_path(__FILE__)), 'external_helper')
+
 
 class TestGlobaLogMain < Test::Unit::TestCase
 	include LogMessage
