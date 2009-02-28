@@ -10,17 +10,21 @@ class GlobaLog
 		
 		def initialize
 			super()
-			self[:log_level] = nil
-			self[:log_output] = nil
-			opts = OptionParser.new do |opts|
-				opts.on('-L','--log-level [STRING]','sets the Test Log Level') do |string|
-					self[:log_level] = string.to_sym
+			unless $keep_argv.empty?
+				self[:opts] = nil
+				self[:log_level] = nil
+				self[:log_output] = nil
+				self[:opts] = true 
+				opts = OptionParser.new do |opts|
+					opts.on('-L','--log-level [STRING]','sets the Test Log Level') do |string|
+						self[:log_level] = string.to_sym
+					end
+					opts.on('-O','--log-output [I/O]','sets the Test Log output') do |io|
+						self[:log_output] = io
+					end
 				end
-				opts.on('-O','--log-output [I/O]','sets the Test Log output') do |io|
-					self[:log_output] = io
-				end
+				opts.parse!($keep_argv)
 			end
-			opts.parse!($keep_argv)
 		end
 
 		def self.keep_wanted_argv
@@ -42,10 +46,9 @@ class GlobaLog
 			end
 			$keep_argv ||= keep
 		end
-
-		self.keep_wanted_argv
+		
+		Hijack.keep_wanted_argv
 		Args.are(self.new)
-
 	end
 	
 end
