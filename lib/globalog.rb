@@ -62,6 +62,7 @@ require 'logger'
 class GlobaLog < Logger
 	require File.join( File.dirname( File.expand_path(__FILE__)), 'globalog_args')
 	require File.join( File.dirname( File.expand_path(__FILE__)), 'globalog_hijack')
+	require File.join( File.dirname( File.expand_path(__FILE__)), 'globalog_runsync')
 	
 	# The GlobaLog.logger acts as a constructor method for the logger.
 	# === Parameters
